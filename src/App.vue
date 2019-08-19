@@ -1,6 +1,12 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" temporary app width="340">
+    <v-navigation-drawer
+      v-model="drawer"
+      class="org-options"
+      temporary
+      app
+      width="340"
+    >
       <v-menu transition="slide-y-transition" bottom>
         <template v-slot:activator="{ on }">
           <v-list-item link v-on="on">
@@ -158,5 +164,8 @@ export default {
 <style>
 .v-overlay.v-overlay--active {
   z-index: 6 !important;
+}
+.org-options.v-navigation-drawer {
+  transition-duration: 0.4s;
 }
 </style>
