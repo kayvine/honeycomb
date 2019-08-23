@@ -19,6 +19,26 @@ export default new Router({
       component: () => import("./views/Content.vue")
     },
     {
+      path: "/web",
+      name: "web",
+      component: () => import("./views/Web.vue")
+    },
+    {
+      path: "/mailing",
+      name: "mailing",
+      component: () => import("./views/Mailing.vue")
+    },
+    {
+      path: "/social",
+      name: "social",
+      component: () => import("./views/Social.vue")
+    },
+    {
+      path: "/insights",
+      name: "insights",
+      component: () => import("./views/Insights.vue")
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting

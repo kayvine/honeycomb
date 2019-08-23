@@ -63,32 +63,41 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
+    <v-app-bar app flat>
       <v-toolbar-items>
         <v-btn
           text
+          class="user-company"
           width="100%"
-          height="100%"
           max-width="240px"
           @click.stop="drawer = !drawer"
         >
-          {{ userCompany }}
+          <span class="company-name" v-text="userCompany"></span>
           <v-spacer></v-spacer>
           <v-icon>menu</v-icon>
         </v-btn>
         <v-btn text to="/content">Content</v-btn>
         <v-btn text to="/web">Web</v-btn>
-        <v-btn text to="/mail">Mail</v-btn>
+        <v-btn text to="/mailing">Mailing</v-btn>
+        <v-btn text to="/social">Social</v-btn>
+        <v-btn text to="/insights">Insights</v-btn>
         <v-btn text to="/about">About</v-btn>
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
+
+      <v-btn depressed color="primary">Create</v-btn>
+
       <v-divider class="mx-4" inset vertical></v-divider>
+
       <v-btn icon>
         <v-icon>contact_support</v-icon>
       </v-btn>
       <v-btn icon>
-        <v-icon>notification_important</v-icon>
+        <v-badge overlap>
+          <template v-slot:badge>2</template>
+          <v-icon>notification_important</v-icon>
+        </v-badge>
       </v-btn>
       <v-btn icon>
         <v-avatar size="32">
@@ -102,9 +111,7 @@
     </v-app-bar>
 
     <v-content role="main">
-      <v-container>
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
@@ -161,11 +168,35 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.theme--light.v-application {
+  background: #fff !important;
+}
 .v-overlay.v-overlay--active {
   z-index: 6 !important;
 }
 .org-options.v-navigation-drawer {
   transition-duration: 0.4s;
+}
+header.theme--light.v-sheet {
+  background-color: #fafafa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.v-app-bar .v-toolbar__content {
+  padding-left: 0;
+}
+.user-company {
+  box-shadow: inset -1px 0 2px 0 rgba(41, 41, 41, 0.04),
+    inset -2px 0 5px 0 rgba(41, 41, 41, 0.035);
+
+  .company-name {
+    overflow: hidden;
+    max-width: 175px;
+    text-overflow: ellipsis;
+  }
+}
+.v-toolbar.position--fixed {
+  position: fixed;
+  z-index: 4;
 }
 </style>

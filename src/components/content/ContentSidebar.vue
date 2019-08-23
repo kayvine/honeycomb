@@ -1,7 +1,7 @@
 <template>
   <v-list flat>
     <v-subheader>View by Status</v-subheader>
-    <v-list-item-group v-model="statusview">
+    <v-list-item-group v-model="filterview">
       <v-list-item v-for="(state, i) in status" :key="i">
         <v-list-item-icon>
           <v-icon v-text="state.icon"></v-icon>
@@ -13,7 +13,7 @@
     </v-list-item-group>
     <v-divider></v-divider>
     <v-subheader>View by Type</v-subheader>
-    <v-list-item-group v-model="typeview">
+    <v-list-item-group v-model="filterview">
       <v-list-item v-for="(type, i) in types" :key="i">
         <v-list-item-icon>
           <v-icon v-text="type.icon"></v-icon>
@@ -35,8 +35,7 @@ export default {
     // HelloWorld
   },
   data: () => ({
-    statusview: 1,
-    typeview: 1,
+    filterview: 1,
     status: [
       { text: "Recent", icon: "access_time" },
       { text: "Ongoing", icon: "arrow_right_alt" },
@@ -45,7 +44,7 @@ export default {
     ],
     types: [
       { text: "News", icon: "local_post_office" },
-      { text: "Attractions", icon: "local_activity" },
+      { text: "Event", icon: "local_activity" },
       { text: "Dining", icon: "restaurant" },
       { text: "Books", icon: "book" },
       { text: "Family", icon: "directions_run" },
@@ -56,3 +55,12 @@ export default {
   })
 };
 </script>
+
+<style lang="scss" scoped>
+.v-list-item__icon {
+  margin: 12px 0;
+}
+.v-divider {
+  margin: 16px 12px;
+}
+</style>
