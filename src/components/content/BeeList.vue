@@ -1,27 +1,15 @@
 <template>
   <div>
-    <div v-if="selectedItems[0]" class="selected-items px-1">
-      <span>{{ selectedItems.length }} selected</span>
-      <v-btn>Delete</v-btn>
-    </div>
-
     <v-card flat>
       <div>
         <template v-for="(item, index) in contentitems">
-          <v-hover 
-            v-slot:default="{ hover }" 
-            :key="item.id"
-          >
-            <v-sheet :key="item.id" class="item d-flex">
+          <v-hover v-slot:default="{ hover }" :key="item.id">
+            <v-sheet class="item d-flex">
               <div class="item__checkbox">
-                <v-checkbox 
-                  v-model="selectedItems" 
-                  :value="item.title"
-                  :class="hover ? 'd-flex' : 'd-none'"
-                ></v-checkbox>
+                <v-checkbox v-model="selected" :value="item.id"></v-checkbox>
               </div>
               <div class="item__icon">
-                <v-icon class="icon">local_post_office</v-icon>
+                <v-icon v-text="item.icon"></v-icon>
               </div>
               <div class="item__details">
                 <h4 v-text="item.title" color="indigo"></h4>
@@ -30,14 +18,21 @@
                   <span><b>-</b> Extra news</span>
                 </p>
               </div>
-              <div class="item__status"></div>
+              <div class="item__status">
+                <v-chip
+                  small
+                  v-text="item.status"
+                  class="ma-1"
+                  :class="{ success: item.status === 'published' }"
+                ></v-chip>
+              </div>
               <div class="item__stats"></div>
               <div class="item__actions">
-                <template v-if="hover">
+                <div :class="hover ? 'd-flex' : 'd-none'">
                   <v-btn tile depressed min-width="110">View</v-btn>
-                  <v-menu offset-y>
-                    <template v-slot:activator="{ on }">
-                      <v-btn tile depressed v-on="on" class="dd-right">
+                  <v-menu>
+                    <template v-slot:activator="{ on: menu }">
+                      <v-btn tile depressed v-on="menu" class="dd-right">
                         <v-icon>arrow_drop_down</v-icon>
                       </v-btn>
                     </template>
@@ -53,7 +48,7 @@
                       </v-list-item>
                     </v-list>
                   </v-menu>
-                </template>
+                </div>
               </div>
             </v-sheet>
           </v-hover>
@@ -75,6 +70,7 @@
 
 <script>
 // import BeeListItem from "./BeeListItem";
+// import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: "BeeList",
@@ -83,8 +79,39 @@ export default {
   },
   props: ["contentitems"],
   data: () => ({
-    selectedItems: [],
+    // 
   }),
+  computed: {
+    // ...mapState ({
+    //   selected: state => state.selected
+    // })
+
+    // // store form handling
+    selected: {
+      get() {
+        return this.$store.state.selected;
+      },
+      set(value) {
+        this.$store.commit("updateSelected", value);
+      }
+    }
+
+    // selected: {
+    //   get() {
+    //     return this.$store.state.selected;
+    //   },
+    //   set(value) {
+    //     this.$store.commit("updateSelected", value);
+    //   }
+    // }
+
+    // format the date to be user readable: (to do)
+    // contentitems.createdOn
+  }
+  // methods: mapMutations([
+  //   'getSelected',
+  //   'getSelectedCount'
+  // ])
 };
 </script>
 
@@ -98,7 +125,17 @@ export default {
     position: absolute;
     top: 0;
     left: -36px;
-    padding: 0 24px 24px 0;
+    padding: 0 4px 24px 0;
+    height: 50px;
+    width: 36px;
+
+    .v-input--checkbox {
+      display: none;
+
+      &.v-input--is-label-active {
+        display: flex;
+      }
+    }
   }
 
   .item__icon {
@@ -111,6 +148,11 @@ export default {
 
   .item__status {
     flex: 0 0 120px;
+
+    .success {
+      background-color: #d8eacc !important;
+      color: #241c15;
+    }
   }
 
   .item__stats {
@@ -126,5 +168,10 @@ export default {
     }
   }
 
+  &:hover {
+    .item__checkbox .v-input--checkbox {
+      display: flex;
+    }
+  }
 }
 </style>

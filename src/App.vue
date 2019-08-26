@@ -15,7 +15,7 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="title">Organization</v-list-item-title>
-              <v-list-item-subtitle>{{ userCompany }}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ user.company }}</v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
               <v-icon>arrow_drop_down</v-icon>
@@ -72,16 +72,16 @@
           max-width="240px"
           @click.stop="drawer = !drawer"
         >
-          <span class="company-name" v-text="userCompany"></span>
+          <span class="company-name" v-text="user.company"></span>
           <v-spacer></v-spacer>
           <v-icon>menu</v-icon>
         </v-btn>
+        <v-btn text to="/">Dashboard</v-btn>
         <v-btn text to="/content">Content</v-btn>
         <v-btn text to="/web">Web</v-btn>
         <v-btn text to="/mailing">Mailing</v-btn>
         <v-btn text to="/social">Social</v-btn>
         <v-btn text to="/insights">Insights</v-btn>
-        <v-btn text to="/about">About</v-btn>
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
@@ -95,7 +95,9 @@
       </v-btn>
       <v-btn icon>
         <v-badge overlap>
-          <template v-slot:badge>2</template>
+          <template v-slot:badge
+            >2</template
+          >
           <v-icon>notification_important</v-icon>
         </v-badge>
       </v-btn>
@@ -126,21 +128,15 @@ export default {
   },
   data: () => ({
     drawer: null,
-    user: [
-      {
-        id: 123,
-        name: "Johnny Strong",
-        company: "Spaceforce Alpha",
-        websites: [
-          { url: "spaceforce.com", favicon: "dashboard" },
-          { url: "alpha-force.org", favicon: "hot_tub" }
-        ]
-      }
-    ],
-    items: [
-      { title: "Home", icon: "dashboard" },
-      { title: "About", icon: "question_answer" }
-    ],
+    user: {
+      id: 123,
+      name: "Johnny Strong",
+      company: "Spaceforce Alpha",
+      websites: [
+        { url: "spaceforce.com", favicon: "dashboard" },
+        { url: "alpha-force.org", favicon: "hot_tub" }
+      ]
+    },
     clients: [
       "Autoviger",
       "B-one-coaching",
@@ -153,11 +149,8 @@ export default {
     ]
   }),
   computed: {
-    userCompany() {
-      return this.user[0].company;
-    },
     userWebsites() {
-      return this.user[0].websites;
+      return this.user.websites;
     }
   },
   methods: {

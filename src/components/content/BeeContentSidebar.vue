@@ -30,7 +30,7 @@
 // import HelloWorld from "./components/HelloWorld";
 
 export default {
-  name: "ContentSidebar",
+  name: "BeeContentSidebar",
   components: {
     // HelloWorld
   },
