@@ -1,6 +1,10 @@
 <template>
-  <div id="web">
-    <v-toolbar dense flat width="100%">
+  <div id="b-web" class="b-beeContent">
+    <v-toolbar 
+      class="b-beeContent_toolbar position--fixed"
+      dense 
+      flat 
+      width="100%">
       <v-toolbar-title>'website name/url' dd-switch</v-toolbar-title>
 
       <div class="flex-grow-1"></div>
@@ -18,70 +22,40 @@
       </v-btn>
     </v-toolbar>
 
-    <v-card class="" width="300">
-      <v-list>
-        <v-list-item>
-          <v-list-item-icon>
-            <v-icon>home</v-icon>
-          </v-list-item-icon>
+    <v-container class="padding--toolbar">
 
-          <v-list-item-title>Home</v-list-item-title>
-        </v-list-item>
+      <v-card class="b-beeContent_sitemap" width="300" tile>
+        <div class="b-beeContent_sitemapInner">
+          <bee-content-sitemap />
+        </div>
+      </v-card>
 
-        <v-list-group prepend-icon="account_circle" value="true">
-          <template v-slot:activator>
-            <v-list-item-title>Users</v-list-item-title>
-          </template>
-
-          <v-list-group no-action sub-group value="true">
-            <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title>Admin</v-list-item-title>
-              </v-list-item-content>
-            </template>
-
-            <v-list-item v-for="(admin, i) in admins" :key="i" link>
-              <v-list-item-title v-text="admin[0]"></v-list-item-title>
-              <v-list-item-icon>
-                <v-icon v-text="admin[1]"></v-icon>
-              </v-list-item-icon>
-            </v-list-item>
-          </v-list-group>
-
-          <v-list-group sub-group no-action>
-            <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title>Actions</v-list-item-title>
-              </v-list-item-content>
-            </template>
-            <v-list-item v-for="(crud, i) in cruds" :key="i" @click="doThis">
-              <v-list-item-title v-text="crud[0]"></v-list-item-title>
-              <v-list-item-action>
-                <v-icon v-text="crud[1]"></v-icon>
-              </v-list-item-action>
-            </v-list-item>
-          </v-list-group>
-        </v-list-group>
-      </v-list>
-    </v-card>
+    </v-container>
   </div>
 </template>
 
 <script>
+import BeeContentSitemap from "@/components/web/BeeContentSitemap";
+
 export default {
+  components: {
+    BeeContentSitemap,
+  },
   data: () => ({
-    admins: [["Management", "people_outline"], ["Settings", "settings"]],
-    cruds: [
-      ["Create", "add"],
-      ["Read", "insert_drive_file"],
-      ["Update", "update"],
-      ["Delete", "delete"]
-    ]
+    // 
   }),
-  methods: {
-    doThis() {
-      alert("Do This!");
-    }
-  }
-};
+}
 </script>
+
+<style lang="scss" scoped>
+.b-beeContent_sitemap {
+  position: fixed;
+  top: calc(65px + 49px);;
+  left: 0;
+  height: calc(100% - 65px - 49px);
+  overflow-y: auto;
+}
+.b-beeContent_sitemapInner {
+  padding: 1rem;
+}
+</style>
