@@ -12,10 +12,10 @@
                 <v-icon v-text="item.icon"></v-icon>
               </div>
               <div class="item__details">
-                <h4 v-text="item.title" color="indigo"></h4>
+                <h4 v-text="item.title"></h4>
                 <p>
-                  <span>News</span>
-                  <span><b>-</b> Extra news</span>
+                  <span v-text="item.type"></span>
+                  <span><b> ·</b> Article</span>
                 </p>
               </div>
               <div class="item__status">
@@ -92,10 +92,7 @@ export default {
       }
     }
   }
-  // methods: mapMutations([
-  //   'getSelected',
-  //   'getSelectedCount'
-  // ])
+  // methods: {},
 };
 </script>
 
@@ -127,7 +124,7 @@ export default {
   }
 
   .item__details {
-    flex: 1 1 200px;
+    flex: 0 1 200px;
   }
 
   .item__status {
@@ -140,7 +137,8 @@ export default {
   }
 
   .item__stats {
-    flex: 0 0 280px;
+    flex: 1 0 auto;
+    min-width: 80px;
   }
 
   .item__actions {

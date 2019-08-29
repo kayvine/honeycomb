@@ -1,12 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      v-model="drawer"
-      class="org-options"
-      temporary
-      app
-      width="340"
-    >
+    <v-navigation-drawer v-model="drawer" class="org-options" temporary app width="340">
       <v-menu transition="slide-y-transition" bottom>
         <template v-slot:activator="{ on }">
           <v-list-item link v-on="on">
@@ -23,11 +17,7 @@
           </v-list-item>
         </template>
         <v-list>
-          <v-list-item
-            v-for="(client, i) in clients"
-            :key="i"
-            @click="changeClient"
-          >
+          <v-list-item v-for="(client, i) in clients" :key="i" @click="changeClient">
             <v-list-item-title>{{ client }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -65,13 +55,7 @@
 
     <v-app-bar app flat>
       <v-toolbar-items>
-        <v-btn
-          text
-          class="user-company"
-          width="100%"
-          max-width="240px"
-          @click.stop="drawer = !drawer"
-        >
+        <v-btn text class="user-company" width="100%" max-width="240px" @click.stop="drawer = !drawer">
           <span class="company-name" v-text="user.company"></span>
           <v-spacer></v-spacer>
           <v-icon>menu</v-icon>
@@ -95,18 +79,13 @@
       </v-btn>
       <v-btn icon>
         <v-badge overlap>
-          <template v-slot:badge
-            >2</template
-          >
+          <template v-slot:badge>2</template>
           <v-icon>notification_important</v-icon>
         </v-badge>
       </v-btn>
       <v-btn icon>
         <v-avatar size="32">
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-            :alt="user.name"
-          >
+          <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" :alt="user.name">
           </v-img>
         </v-avatar>
       </v-btn>
@@ -119,80 +98,92 @@
 </template>
 
 <script>
-// import AppBarSidepanelTrigger from "./components/AppBarSidepanelTrigger";
+  // import AppBarSidepanelTrigger from "./components/AppBarSidepanelTrigger";
 
-export default {
-  name: "App",
-  components: {
-    // AppBarSidepanelTrigger
-  },
-  data: () => ({
-    drawer: null,
-    user: {
-      id: 123,
-      name: "Johnny Strong",
-      company: "Spaceforce Alpha",
-      websites: [
-        { url: "spaceforce.com", favicon: "dashboard" },
-        { url: "alpha-force.org", favicon: "hot_tub" }
-      ]
+  export default {
+    name: "App",
+    components: {
+      // AppBarSidepanelTrigger
     },
-    clients: [
-      "Autoviger",
-      "B-one-coaching",
-      "Bouhon",
-      "Go2theworld",
-      "Hansea",
-      "Heidebloem",
-      "Jejowines",
-      "Some company"
-    ]
-  }),
-  computed: {
-    userWebsites() {
-      return this.user.websites;
+    data: () => ({
+      drawer: null,
+      user: {
+        id: 123,
+        name: "Johnny Strong",
+        company: "Spaceforce Alpha",
+        websites: [{
+            url: "spaceforce.com",
+            favicon: "dashboard"
+          },
+          {
+            url: "alpha-force.org",
+            favicon: "hot_tub"
+          }
+        ]
+      },
+      clients: [
+        "Autoviger",
+        "B-one-coaching",
+        "Bouhon",
+        "Go2theworld",
+        "Hansea",
+        "Heidebloem",
+        "Jejowines",
+        "Some company"
+      ]
+    }),
+    computed: {
+      userWebsites() {
+        return this.user.websites;
+      }
+    },
+    methods: {
+      changeClient() {
+        alert("Changing clients");
+      }
     }
-  },
-  methods: {
-    changeClient() {
-      alert("Changing clients");
-    }
-  }
-};
+  };
 </script>
 
 <style lang="scss">
-.theme--light.v-application {
-  background: #fff !important;
-}
-.v-overlay.v-overlay--active {
-  z-index: 6 !important;
-}
-.org-options.v-navigation-drawer {
-  transition-duration: 0.4s;
-}
-header.theme--light.v-sheet {
-  background-color: #fafafa;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-}
-.v-app-bar .v-toolbar__content {
-  padding-left: 0;
-}
-.user-company {
-  box-shadow: inset -1px 0 2px 0 rgba(41, 41, 41, 0.04),
-    inset -2px 0 5px 0 rgba(41, 41, 41, 0.035);
-
-  .company-name {
-    overflow: hidden;
-    max-width: 175px;
-    text-overflow: ellipsis;
+  .theme--light.v-application {
+    background: #fff !important;
   }
-}
-.v-toolbar.position--fixed {
-  position: fixed;
-  z-index: 4;
-}
-.padding--toolbar {
-  padding-top: 72px !important;
-}
+
+  .v-overlay.v-overlay--active {
+    z-index: 6 !important;
+  }
+
+  .org-options.v-navigation-drawer {
+    transition-duration: 0.4s;
+  }
+
+  header.theme--light.v-sheet {
+    background-color: #fafafa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .v-app-bar .v-toolbar__content {
+    padding-left: 0;
+  }
+
+  .user-company {
+    box-shadow: inset -1px 0 2px 0 rgba(41, 41, 41, 0.04),
+      inset -2px 0 5px 0 rgba(41, 41, 41, 0.035);
+
+    .company-name {
+      overflow: hidden;
+      max-width: 175px;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .v-toolbar.position--fixed {
+    position: fixed;
+    z-index: 4;
+  }
+
+  .padding--toolbar {
+    padding-top: 72px !important;
+  }
 </style>

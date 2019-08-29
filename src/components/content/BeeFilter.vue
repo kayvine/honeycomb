@@ -1,4 +1,5 @@
 <template>
+  <!-- https://vuetifyjs.com/en/components/combobox -->
   <v-combobox
     v-model="model"
     :filter="filter"
@@ -90,7 +91,7 @@ export default {
     editing: null,
     index: -1,
     items: [
-      { header: 'Select an option or create one' },
+      // { header: 'Select an option or create one' },
       {
         text: 'Foo',
         color: 'blue',
@@ -102,12 +103,7 @@ export default {
     ],
     nonce: 1,
     menu: false,
-    model: [
-      {
-        text: 'Foo',
-        color: 'blue',
-      },
-    ],
+    model: [],
     x: 0,
     search: null,
     y: 0,
