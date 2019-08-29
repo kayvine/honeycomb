@@ -79,14 +79,10 @@ export default {
   },
   props: ["contentitems"],
   data: () => ({
-    // 
+    //
   }),
   computed: {
-    // ...mapState ({
-    //   selected: state => state.selected
-    // })
-
-    // // store form handling
+    // store form handling
     selected: {
       get() {
         return this.$store.state.selected;
@@ -95,18 +91,6 @@ export default {
         this.$store.commit("updateSelected", value);
       }
     }
-
-    // selected: {
-    //   get() {
-    //     return this.$store.state.selected;
-    //   },
-    //   set(value) {
-    //     this.$store.commit("updateSelected", value);
-    //   }
-    // }
-
-    // format the date to be user readable: (to do)
-    // contentitems.createdOn
   }
   // methods: mapMutations([
   //   'getSelected',

@@ -53,10 +53,10 @@ export default new Vuex.Store({
         status: "draft"
       }
     ],
-    selected: [],
+    selected: []
   },
   getters: {
-    getSelectedCount: (state) => {
+    getSelectedCount: state => {
       return state.selected.length;
     },
     getSelectedById: state => id => {
@@ -66,6 +66,9 @@ export default new Vuex.Store({
   mutations: {
     updateSelected(state, payload) {
       state.selected = payload;
+    },
+    deselectAll(state) {
+      state.selected = []
     }
   },
   actions: {}

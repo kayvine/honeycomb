@@ -192,4 +192,7 @@ header.theme--light.v-sheet {
   position: fixed;
   z-index: 4;
 }
+.padding--toolbar {
+  padding-top: 72px !important;
+}
 </style>
